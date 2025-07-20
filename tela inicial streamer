@@ -1,0 +1,1140 @@
+ <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic+ | O Universo Mágico do Entretenimento</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #0063e5;
+            --primary-light-blue: #00a8ff;
+            --primary-purple: #8a2be2;
+            --primary-pink: #ff2d75;
+            --dark-blue: #040714;
+            --darker-blue: #020c1b;
+            --light-gray: #f9f9f9;
+            --white: #ffffff;
+            --black: #000000;
+            --gradient-bg: linear-gradient(135deg, var(--primary-blue), var(--primary-light-blue));
+            --magic-gradient: linear-gradient(135deg, var(--primary-purple), var(--primary-pink));
+        }
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Montserrat', sans-serif;
+        }
+
+
+        body {
+            background-color: var(--dark-blue);
+            color: var(--white);
+            overflow-x: hidden;
+        }
+
+
+        /* Navbar Estilo Disney+ */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 3rem;
+            background-color: transparent;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.5s ease;
+        }
+
+
+        .navbar.scrolled {
+            background-color: var(--dark-blue);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            padding: 1rem 3rem;
+        }
+
+
+        .navbar-left {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+
+        .logo {
+            height: 50px;
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 0 10px rgba(138, 43, 226, 0.5));
+        }
+
+
+        .navbar.scrolled .logo {
+            height: 40px;
+        }
+
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+        }
+
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--magic-gradient);
+            transition: width 0.3s ease;
+        }
+
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+
+        .nav-links a:hover {
+            color: var(--primary-light-blue);
+        }
+
+
+        .login-btn {
+            background: var(--magic-gradient);
+            border: none;
+            padding: 0.7rem 1.8rem;
+            border-radius: 4px;
+            color: var(--white);
+            font-weight: bold;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+
+        .login-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+
+        .login-btn:hover::before {
+            left: 100%;
+        }
+
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(138, 43, 226, 0.6);
+        }
+
+
+        /* Hero Section com Efeito Parallax */
+        .hero {
+            height: 100vh;
+            background: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80') no-repeat center center;
+            background-size: cover;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(4, 7, 20, 0.8), rgba(4, 7, 20, 0.4));
+            z-index: 1;
+        }
+
+
+        .hero-content {
+            padding: 0 5rem;
+            max-width: 700px;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s ease-out;
+        }
+
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            background: var(--magic-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.1;
+            text-shadow: 0 0 20px rgba(138, 43, 226, 0.3);
+            font-weight: 700;
+        }
+
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+
+        .cta-btn {
+            padding: 1rem 2rem;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+
+        .primary-btn {
+            background: var(--magic-gradient);
+            color: var(--white);
+            border: none;
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+        }
+
+
+        .primary-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(138, 43, 226, 0.6);
+        }
+
+
+        .secondary-btn {
+            background: transparent;
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(5px);
+        }
+
+
+        .secondary-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+
+        /* Floating Magic Elements */
+        .magic-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+
+        .magic-element {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.3;
+            animation: float 15s infinite linear;
+        }
+
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-50px) rotate(180deg);
+            }
+            100% {
+                transform: translateY(0) rotate(360deg);
+            }
+        }
+
+
+        .element-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--primary-blue);
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+
+        .element-2 {
+            width: 200px;
+            height: 200px;
+            background: var(--primary-purple);
+            top: 60%;
+            left: 70%;
+            animation-delay: 2s;
+            animation-duration: 12s;
+        }
+
+
+        .element-3 {
+            width: 150px;
+            height: 150px;
+            background: var(--primary-pink);
+            top: 30%;
+            left: 50%;
+            animation-delay: 4s;
+            animation-duration: 10s;
+        }
+
+
+        /* Content Sections */
+        .content-section {
+            padding: 5rem 3rem;
+            position: relative;
+        }
+
+
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 2.5rem;
+            color: var(--white);
+            position: relative;
+            padding-bottom: 1rem;
+            font-weight: 700;
+        }
+
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100px;
+            height: 4px;
+            background: var(--magic-gradient);
+            border-radius: 2px;
+        }
+
+
+        .carousel-container {
+            position: relative;
+        }
+
+
+        .carousel {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            padding: 1.5rem 0;
+            scrollbar-width: none;
+            scroll-behavior: smooth;
+        }
+
+
+        .carousel::-webkit-scrollbar {
+            display: none;
+        }
+
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 0, 0, 0.7);
+            border: none;
+            border-radius: 50%;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+
+        .carousel-container:hover .carousel-btn {
+            opacity: 1;
+        }
+
+
+        .carousel-btn.prev {
+            left: -25px;
+        }
+
+
+        .carousel-btn.next {
+            right: -25px;
+        }
+
+
+        .carousel-btn:hover {
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+
+        .movie-card {
+            min-width: 280px;
+            height: 420px;
+            border-radius: 8px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            flex-shrink: 0;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+
+        .movie-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+
+        .movie-card:hover::before {
+            opacity: 1;
+        }
+
+
+        .movie-card:hover {
+            transform: scale(1.08) translateY(-10px);
+            z-index: 5;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+        }
+
+
+        .movie-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            opacity: 0;
+        }
+
+
+        .movie-card:hover .movie-info {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+
+        .movie-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+
+        .movie-meta {
+            display: flex;
+            gap: 0.8rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            color: #ffd700;
+        }
+
+
+        .play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            width: 60px;
+            height: 60px;
+            background: var(--magic-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
+        }
+
+
+        .movie-card:hover .play-btn {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+
+        /* Featured Section */
+        .featured-section {
+            padding: 6rem 3rem;
+            background: linear-gradient(to bottom, var(--dark-blue), var(--darker-blue));
+            position: relative;
+            overflow: hidden;
+        }
+
+
+        .featured-content {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+
+        .featured-text {
+            flex: 1;
+        }
+
+
+        .featured-image {
+            flex: 1;
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            transform: perspective(1000px) rotateY(-10deg);
+            transition: transform 0.5s ease;
+        }
+
+
+        .featured-image:hover {
+            transform: perspective(1000px) rotateY(0deg);
+        }
+
+
+        .featured-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+
+        .featured-badge {
+            display: inline-block;
+            background: var(--magic-gradient);
+            color: var(--white);
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+        }
+
+
+        .featured-title {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            background: var(--magic-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.1;
+        }
+
+
+        .featured-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+        }
+
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(to bottom, var(--darker-blue), #01050e);
+            padding: 5rem 3rem 2rem;
+            position: relative;
+        }
+
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+
+        .footer-logo {
+            height: 50px;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 0 10px rgba(138, 43, 226, 0.5));
+        }
+
+
+        .footer-links-section h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+
+        .footer-links-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--magic-gradient);
+        }
+
+
+        .footer-links {
+            list-style: none;
+        }
+
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+
+        .footer-links a:hover {
+            color: var(--primary-light-blue);
+            padding-left: 5px;
+        }
+
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+
+        .social-links a {
+            color: var(--white);
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+        }
+
+
+        .social-links a:hover {
+            transform: translateY(-3px);
+            color: var(--primary-light-blue);
+        }
+
+
+        .copyright {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.8rem;
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+
+        /* Magic Particles */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+
+        .particle {
+            position: absolute;
+            background: var(--white);
+            border-radius: 50%;
+            opacity: 0;
+            animation: fall linear infinite;
+        }
+
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+           
+            .featured-content {
+                flex-direction: column;
+            }
+           
+            .featured-image {
+                max-width: 500px;
+                margin: 0 auto;
+            }
+        }
+
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+           
+            .nav-links {
+                display: none;
+            }
+           
+            .hero-content {
+                padding: 0 2rem;
+                text-align: center;
+            }
+           
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+           
+            .cta-buttons {
+                justify-content: center;
+            }
+           
+            .content-section {
+                padding: 3rem 1.5rem;
+            }
+           
+            .movie-card {
+                min-width: 220px;
+                height: 330px;
+            }
+           
+            .featured-title {
+                font-size: 2rem;
+            }
+        }
+
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+           
+            .hero p {
+                font-size: 1rem;
+            }
+           
+            .cta-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+           
+            .cta-btn {
+                width: 100%;
+                justify-content: center;
+            }
+           
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-left">
+            <img src="https://via.placeholder.com/150x50/8a2be2/ffffff?text=Magic%2B" alt="Nostalgia" class="logo">
+            <ul class="nav-links">
+                <li><a href="#">Início</a></li>
+                <li><a href="#">Séries</a></li>
+                <li><a href="#">Filmes</a></li>
+                <li><a href="#">Originais</a></li>
+                <li><a href="#">Minha Lista</a></li>
+            </ul>
+        </div>
+        <div class="navbar-right">
+            <button class="login-btn" onclick="window.location.href='login.html'">
+                <i class="fas fa-user-circle"></i>
+                <span>ENTRAR</span>
+            </button>
+        </div>
+    </nav>
+
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="magic-elements">
+            <div class="magic-element element-1"></div>
+            <div class="magic-element element-2"></div>
+            <div class="magic-element element-3"></div>
+        </div>
+        <div class="hero-content">
+            <h1>Descubra um Universo da Nostalgia</h1>
+            <p>Assista aos melhores filmes, séries e conteúdos exclusivos em um só lugar. Novos lançamentos toda semana e uma biblioteca que nunca para de crescer.</p>
+            <div class="cta-buttons">
+                <button class="cta-btn primary-btn" onclick="window.location.href='planos.html'">
+                    <i class="fas fa-play"></i>
+                    <span>ASSINE AGORA</span>
+                </button>
+                <button class="cta-btn secondary-btn">
+                    <i class="fas fa-info-circle"></i>
+                    <span>SAIBA MAIS</span>
+                </button>
+            </div>
+        </div>
+        <div class="particles" id="particles"></div>
+    </section>
+
+
+    <!-- Content Sections -->
+    <section class="content-section">
+        <h2 class="section-title">Destaques da Semana</h2>
+        <div class="carousel-container">
+            <button class="carousel-btn prev" onclick="scrollCarousel(-1)"><i class="fas fa-chevron-left"></i></button>
+            <div class="carousel">
+                <div class="movie-card" style="background-image: url('https://via.placeholder.com/280x420/6a5acd/ffffff?text=Destaque+1')">
+                    <div class="movie-info">
+                        <h3>A Lenda do Vale Encantado</h3>
+                        <div class="movie-meta">
+                            <span>2023</span>
+                            <span>•</span>
+                            <span>Fantasia</span>
+                            <span>•</span>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.8</span>
+                            </div>
+                        </div>
+                        <p>Uma aventura épica através de reinos mágicos e criaturas lendárias.</p>
+                    </div>
+                    <div class="play-btn">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+                <div class="movie-card" style="background-image: url('https://via.placeholder.com/280x420/0063e5/ffffff?text=Destaque+2')">
+                    <div class="movie-info">
+                        <h3>Os Guardiões Estelares</h3>
+                        <div class="movie-meta">
+                            <span>2023</span>
+                            <span>•</span>
+                            <span>Aventura</span>
+                            <span>•</span>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.9</span>
+                            </div>
+                        </div>
+                        <p>Um grupo de heróis cósmicos protege a galáxia de ameaças interdimensionais.</p>
+                    </div>
+                    <div class="play-btn">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+                <div class="movie-card" style="background-image: url('https://via.placeholder.com/280x420/8a2be2/ffffff?text=Destaque+3')">
+                    <div class="movie-info">
+                        <h3>O Reino das Sombras</h3>
+                        <div class="movie-meta">
+                            <span>2022</span>
+                            <span>•</span>
+                            <span>Suspense</span>
+                            <span>•</span>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.7</span>
+                            </div>
+                        </div>
+                        <p>Uma jornada sombria através de um reino esquecido cheio de mistérios.</p>
+                    </div>
+                    <div class="play-btn">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+                <div class="movie-card" style="background-image: url('https://via.placeholder.com/280x420/ff2d75/ffffff?text=Destaque+4')">
+                    <div class="movie-info">
+                        <h3>Fadas Urbanas</h3>
+                        <div class="movie-meta">
+                            <span>2023</span>
+                            <span>•</span>
+                            <span>Comédia</span>
+                            <span>•</span>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.5</span>
+                            </div>
+                        </div>
+                        <p>Fadas modernas enfrentam os desafios da vida na cidade grande.</p>
+                    </div>
+                    <div class="play-btn">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+                <div class="movie-card" style="background-image: url('https://via.placeholder.com/280x420/00a8ff/ffffff?text=Destaque+5')">
+                    <div class="movie-info">
+                        <h3>O Portal Secreto</h3>
+                        <div class="movie-meta">
+                            <span>2023</span>
+                            <span>•</span>
+                            <span>Aventura</span>
+                            <span>•</span>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.8</span>
+                            </div>
+                        </div>
+                        <p>Dois irmãos descobrem um portal para um mundo paralelo em seu quintal.</p>
+                    </div>
+                    <div class="play-btn">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+                <div class="movie-card" style="background-image: url('https://via.placeholder.com/280x420/9370db/ffffff?text=Destaque+6')">
+                    <div class="movie-info">
+                        <h3>Coraline e o Mundo dos Sonhos</h3>
+                        <div class="movie-meta">
+                            <span>2023</span>
+                            <span>•</span>
+                            <span>Fantasia</span>
+                            <span>•</span>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.9</span>
+                            </div>
+                        </div>
+                        <p>Uma adaptação moderna do clássico conto de Neil Gaiman.</p>
+                    </div>
+                    <div class="play-btn">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-btn next" onclick="scrollCarousel(1)"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </section>
+
+
+    <!-- Featured Section -->
+    <section class="featured-section">
+        <div class="featured-content">
+            <div class="featured-text">
+                <span class="featured-badge">EXCLUSIVO MAGIC+</span>
+                <h2 class="featured-title">As Crônicas de Eldoria</h2>
+                <p class="featured-description">A nova série original Magic+ que está conquistando o mundo! Siga a jornada de Aria, uma jovem descobrindo seus poderes mágicos em um reino à beira da guerra. Com efeitos visuais deslumbrantes e uma história cativante, Eldoria se tornou um fenômeno global.</p>
+                <div class="cta-buttons">
+                    <button class="cta-btn primary-btn" onclick="window.location.href='planos.html'">
+                        <i class="fas fa-play"></i>
+                        <span>ASSINE AGORA</span>
+                    </button>
+                    <button class="cta-btn secondary-btn">
+                        <i class="fas fa-plus"></i>
+                        <span>MINHA LISTA</span>
+                    </button>
+                </div>
+            </div>
+            <div class="featured-image">
+                <img src="https://via.placeholder.com/600x400/8a2be2/ffffff?text=Eldoria" alt="As Crônicas de Eldoria">
+            </div>
+        </div>
+        <div class="particles" id="featured-particles"></div>
+    </section>
+
+
+    <!-- More Content Sections -->
+    <section class="content-section">
+        <h2 class="section-title">Séries Originais</h2>
+        <div class="carousel-container">
+            <button class="carousel-btn prev" onclick="scrollCarousel(-1, 1)"><i class="fas fa-chevron-left"></i></button>
+            <div class="carousel" id="series-carousel">
+                <div class="movie-card" style="background-image: url('https://via.placeholder.com/280x420/1e90ff/ffffff?text=Série+1')">
+                    <div class="movie-info">
+                        <h3>Academia Arcana</h3>
+                        <div class="movie-meta">
+                            <span>2023</span>
+                            <span>•</span>
+                            <span>Fantasia</span>
+                            <span>•</span>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.7</span>
+                            </div>
+                        </div>
+                        <p>Jovens bruxos aprendem a dominar seus poderes em uma escola secreta.</p>
+                    </div>
+                    <div class="play-btn">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+                <div class="movie-card" style="background-image: url('https://via.placeholder.com/280x420/9932cc/ffffff?text=Série+2')">
+                    <div class="movie-info">
+                        <h3>Lunaris</h3>
+                        <div class="movie-meta">
+                            <span>2022</span>
+                            <span>•</span>
+                            <span>Drama</span>
+                            <span>•</span>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.8</span>
+                            </div>
+                        </div>
+                        <p>Uma cidade lunar esconde segredos que podem mudar o destino da humanidade.</p>
+                    </div>
+                    <div class="play-btn">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+                <div class="movie-card" style="background-image: url('https://via.placeholder.com/280x420/00bfff/ffffff?text=Série+3')">
+                    <div class="movie-info">
+                        <h3>Os Invisíveis</h3>
+                        <div class="movie-meta">
+                            <span>2023</span>
+                            <span>•</span>
+                            <span>Ação</span>
+                            <span>•</span>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.6</span>
+                            </div>
+                        </div>
+                        <p>Um grupo de adolescentes com habilidades especiais luta contra forças sombrias.</p>
+                    </div>
+                    <div class="play-btn">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+                <div class="movie-card" style="background-image: url('https://via.placeholder.com/280x420/ff69b4/ffffff?text=Série+4')">
+                    <div class="movie-info">
+                        <h3>Fairy Tail: Nova Geração</h3>
+                        <div class="movie-meta">
+                            <span>2023</span>
+                            <span>•</span>
+                            <span>Animação</span>
+                            <span>•</span>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.9</span>
+                            </div>
+                        </div>
+                        <p>A próxima geração de magos continua o legado do famoso guild Fairy Tail.</p>
+                    </div>
+                    <div class="play-btn">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+                <div class="movie-card" style="background-image: url('https://via.placeholder.com/280x420/9370db/ffffff?text=Série+5')">
+                    <div class="movie-info">
+                        <h3>O Oráculo</h3>
+                        <div class="movie-meta">
+                            <span>2023</span>
+                            <span>•</span>
+                            <span>Mistério</span>
+                            <span>•</span>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.7</span>
+                            </div>
+                        </div>
+                        <p>Uma jovem descobre que pode prever o futuro, mas cada visão tem um preço.</p>
+                    </div>
+                    <div class="play-btn">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-btn next" onclick="scrollCarousel(1, 1)"><i class="fas fa-chevron-right"></i></button>
+        </div
