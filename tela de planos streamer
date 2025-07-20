@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic+ | Planos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #0063e5;
+            --primary-light-blue: #00a8ff;
+            --primary-purple: #8a2be2;
+            --primary-pink: #ff2d75;
+            --dark-blue: #040714;
+            --darker-blue: #020c1b;
+            --light-gray: #f9f9f9;
+            --white: #ffffff;
+            --black: #000000;
+            --gradient-bg: linear-gradient(135deg, var(--primary-blue), var(--primary-light-blue));
+            --magic-gradient: linear-gradient(135deg, var(--primary-purple), var(--primary-pink));
+        }
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Montserrat', sans-serif;
+        }
+
+
+        body {
+            background-color: var(--dark-blue);
+            color: var(--white);
+            overflow-x: hidden;
+        }
+
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 3rem;
+            background-color: var(--dark-blue);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+
+        .logo {
+            height: 40px;
+            filter: drop-shadow(0 0 10px rgba(138, 43, 226, 0.5));
+        }
+
+
+        .login-btn {
+            background: var(--magic-gradient);
+            border: none;
+            padding: 0.7rem 1.8rem;
+            border-radius: 4px;
+            color: var(--white);
+            font-weight: bold;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+        }
+
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(138, 43, 226, 0.6);
+        }
+
+
+        /* Plans Hero */
+        .plans-hero {
+            padding: 10rem 3rem 5rem;
+            text-align: center;
+            background: linear-gradient(to bottom, var(--dark-blue), var(--darker-blue));
+            position: relative;
+            overflow: hidden;
+        }
+
+
+        .plans-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: var(--magic-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.1;
+            font-weight: 700;
+        }
+
+
+        .plans-hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+        }
+
+
+        .magic-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+
+        .magic-element {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.3;
+            animation: float 15s infinite linear;
+        }
+
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-50px) rotate(180deg);
+            }
+            100% {
+                transform: translateY(0) rotate(360deg);
+            }
+        }
+
+
+        .element-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--primary-blue);
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+
+        .element-2 {
+            width: 200px;
+            height: 200px;
+            background: var(--primary-purple);
+            top: 60%;
+            left: 70%;
+            animation-delay: 2s;
+            animation-duration: 12s;
+        }
+
+
+        .element-3 {
+            width: 150px;
+            height: 150px;
+            background: var(--primary-pink);
+            top: 30%;
+            left: 50%;
+            animation-delay: 4s;
+            animation-duration: 10s;
+        }
+
+
+        /* Plans Section */
+        .plans-section {
+            padding: 5rem 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+
+        .plan-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 2.5rem 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+
+        .plan-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--magic-gradient);
+        }
+
+
+        .plan-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+        }
+
+
+        .plan-card.popular {
+            border: 1px solid var(--primary-purple);
+            box-shadow: 0 0 30px rgba(138, 43, 226, 0.3);
+        }
+
+
+        .plan-card.popular::after {
+            content: 'POPULAR';
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--magic-gradient);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+
+        .plan-name {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+
+        .plan-price {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+
+        .plan-price span {
+            font-size: 1rem;
+            opacity: 0.8;
+            font-weight: normal;
+        }
+
+
+        .plan-features {
+            list-style: none;
+            margin-bottom: 2.5rem;
+        }
+
+
+        .plan-features li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+
+        .plan-features li i {
+            color: var(--primary-light-blue);
+        }
+
+
+        .plan-btn {
+            width: 100%;
+            padding: 1rem;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+
+        .primary-plan-btn {
+            background: var(--magic-gradient);
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+        }
+
+
+        .primary-plan-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(138, 43, 226, 0.6);
+        }
+
+
+        .secondary-plan-btn {
+            background: transparent;
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+
+        .secondary-plan-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 5rem 3rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 2.5rem;
+            color: var(--white);
+            position: relative;
+            padding-bottom: 1rem;
+            text-align: center;
+            font-weight: 700;
+        }
+
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--magic-gradient);
+            border-radius: 2px;
+        }
+
+
+        .faq-item {
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+
+        .faq-item.active {
+            border-color: var(--primary-purple);
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.2);
+        }
+
+
+        .faq-question {
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+
+        .faq-item.active .faq-question {
+            background: rgba(138, 43, 226, 0.1);
+        }
+
+
+        .faq-question i {
+            transition: transform 0.3s ease;
+        }
+
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+
+        .faq-item.active .faq-answer {
+            padding: 1.5rem;
+            max-height: 500px;
+        }
+
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(to bottom, var(--darker-blue), #01050e);
+            padding: 5rem 3rem 2rem;
+            position: relative;
+        }
+
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+
+        .footer-logo {
+            height: 50px;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 0 10px rgba(138, 43, 226, 0.5));
+        }
+
+
+        .footer-links-section h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+
+        .footer-links-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--magic-gradient);
+        }
+
+
+        .footer-links {
+            list-style: none;
+        }
+
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+
+        .footer-links a:hover {
+            color: var(--white);
+            text-decoration: underline;
+        }
+
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+
+        .social-links a {
+            color: var(--white);
+            background: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+
+        .social-links a:hover {
+            background: var(--magic-gradient);
+            transform: translateY(-3px);
+        }
+
+
+        .copyright {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem 1.5rem;
+            }
+
+
+            .plans-hero {
+                padding: 8rem 1.5rem 3rem;
+            }
+
+
+            .plans-hero h1 {
+                font-size: 2.5rem;
+            }
+
+
+            .plans-hero p {
+                font-size: 1.1rem;
+            }
+
+
+            .plans-section, .faq-section {
+                padding: 3rem 1.5rem;
+            }
+
+
+            .footer {
+                padding: 3rem 1.5rem 2rem;
+            }
+        }
+
+
+        @media (max-width: 480px) {
+            .plans-hero h1 {
+                font-size: 2rem;
+            }
+
+
+            .plans-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <img src="https://via.placeholder.com/150x40?text=Magic+" alt="Magic+ Logo" class="logo">
+        <button class="login-btn">Entrar</button>
+    </nav>
+
+
+    <!-- Plans Hero -->
+    <section class="plans-hero">
+        <div class="magic-elements">
+            <div class="magic-element element-1"></div>
+            <div class="magic-element element-2"></div>
+            <div class="magic-element element-3"></div>
+        </div>
+        <h1>Escolha seu plano Magic+</h1>
+        <p>Assista aos melhores conteúdos de entretenimento, esportes e filmes em qualquer dispositivo, onde e quando quiser.</p>
+    </section>
+
+
+    <!-- Plans Section -->
+    <section class="plans-section">
+        <h2 class="section-title">Nossos Planos</h2>
+        <div class="plans-grid">
+            <!-- Basic Plan -->
+            <div class="plan-card">
+                <h3 class="plan-name">Básico</h3>
+                <div class="plan-price">R$ 19,90 <span>/mês</span></div>
+                <ul class="plan-features">
+                    <li><i class="fas fa-check"></i> Acesso a todos os conteúdos básicos</li>
+                    <li><i class="fas fa-check"></i> 1 tela simultânea</li>
+                    <li><i class="fas fa-check"></i> Qualidade HD</li>
+                    <li><i class="fas fa-check"></i> Suporte 24/7</li>
+                    <li><i class="fas fa-check"></i> Cancelamento a qualquer momento</li>
+                </ul>
+                <button class="plan-btn primary-plan-btn" onclick="window.location.href='login.html'">Assinar agora</button>
+            </div>
+
+
+            <!-- Standard Plan (Popular) -->
+            <div class="plan-card popular">
+                <h3 class="plan-name">Padrão</h3>
+                <div class="plan-price">R$ 29,90 <span>/mês</span></div>
+                <ul class="plan-features">
+                    <li><i class="fas fa-check"></i> Todos os benefícios do plano Básico</li>
+                    <li><i class="fas fa-check"></i> 2 telas simultâneas</li>
+                    <li><i class="fas fa-check"></i> Qualidade Full HD</li>
+                    <li><i class="fas fa-check"></i> Conteúdos exclusivos</li>
+                    <li><i class="fas fa-check"></i> 30% de desconto em eventos ao vivo</li>
+                </ul>
+                <button class="plan-btn primary-plan-btn" onclick="window.location.href='login.html'">Assinar agora</button>            </div>
+
+
+            <!-- Premium Plan -->
+            <div class="plan-card">
+                <h3 class="plan-name">Premium</h3>
+                <div class="plan-price">R$ 49,90 <span>/mês</span></div>
+                <ul class="plan-features">
+                    <li><i class="fas fa-check"></i> Todos os benefícios do plano Padrão</li>
+                    <li><i class="fas fa-check"></i> 4 telas simultâneas</li>
+                    <li><i class="fas fa-check"></i> Qualidade 4K Ultra HD</li>
+                    <li><i class="fas fa-check"></i> Acesso antecipado a novos conteúdos</li>
+                    <li><i class="fas fa-check"></i> 50% de desconto em eventos ao vivo</li>
+                    <li><i class="fas fa-check"></i> Conteúdos exclusivos VIP</li>
+                </ul>
+                <button class="plan-btn primary-plan-btn" onclick="window.location.href='login.html'">Assinar agora</button>            </div>
+        </div>
+    </section>
+
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <h2 class="section-title">Perguntas Frequentes</h2>
+       
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>O que está incluído no Magic+?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                <p>O Magic+ oferece acesso a milhares de filmes, séries, documentários e eventos esportivos. Você pode assistir em vários dispositivos, criar perfis personalizados, baixar conteúdos para assistir offline e muito mais.</p>
+            </div>
+        </div>
+       
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Como posso cancelar minha assinatura?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Você pode cancelar a qualquer momento na seção de configurações da sua conta. O cancelamento será efetivado no final do seu período de cobrança atual e você continuará tendo acesso até essa data.</p>
+            </div>
+        </div>
+       
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Posso mudar de plano a qualquer momento?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Sim, você pode mudar para um plano superior ou inferior a qualquer momento. A alteração será aplicada imediatamente e o valor será ajustado proporcionalmente.</p>
+            </div>
+        </div>
+       
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Quantos dispositivos posso usar simultaneamente?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Depende do seu plano: Básico (1 tela), Padrão (2 telas), Premium (4 telas). Você pode registrar até 10 dispositivos diferentes, mas só poderá assistir no número de telas permitido pelo seu plano.</p>
+            </div>
+        </div>
+       
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>O Magic+ está disponível em outros países?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Sim, você pode acessar o Magic+ em mais de 50 países. Alguns conteúdos podem variar de acordo com a região devido a restrições de licenciamento.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links-section">
+                <img src="https://via.placeholder.com/150x50?text=Magic+" alt="Magic+ Logo" class="footer-logo">
+                <p style="color: rgba(255, 255, 255, 0.7); margin-bottom: 1.5rem;">O melhor entretenimento na palma da sua mão.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+           
+            <div class="footer-links-section">
+                <h3>Início</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Séries</a></li>
+                    <li><a href="#">Filmes</a></li>
+                    <li><a href="#">Esportes</a></li>
+                    <li><a href="#">Infantil</a></li>
+                </ul>
+            </div>
+           
+            <div class="footer-links-section">
+                <h3>Sobre</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Sobre nós</a></li>
+                    <li><a href="#">Carreiras</a></li>
+                    <li><a href="#">Imprensa</a></li>
+                    <li><a href="#">Parceiros</a></li>
+                    <li><a href="#">Contato</a></li>
+                </ul>
+            </div>
+           
+            <div class="footer-links-section">
+                <h3>Ajuda</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Central de Ajuda</a></li>
+                    <li><a href="#">Termos de Uso</a></li>
+                    <li><a href="#">Política de Privacidade</a></li>
+                    <li><a href="#">Cookies</a></li>
+                    <li><a href="#">Preferências</a></li>
+                </ul>
+            </div>
+        </div>
+       
+        <div class="copyright">
+            &copy; 2023 Magic+. Todos os direitos reservados.
+        </div>
+    </footer>
+
+
+    <script>
+        // FAQ Toggle
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                item.classList.toggle('active');
+               
+                // Close other open items
+                document.querySelectorAll('.faq-item').forEach(otherItem => {
+                    if (otherItem !== item && otherItem.classList.contains('active')) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
