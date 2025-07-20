@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic+ | Entrar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #0063e5;
+            --primary-light-blue: #00a8ff;
+            --primary-purple: #8a2be2;
+            --primary-pink: #ff2d75;
+            --dark-blue: #040714;
+            --darker-blue: #020c1b;
+            --light-gray: #f9f9f9;
+            --white: #ffffff;
+            --black: #000000;
+            --gradient-bg: linear-gradient(135deg, var(--primary-blue), var(--primary-light-blue));
+            --magic-gradient: linear-gradient(135deg, var(--primary-purple), var(--primary-pink));
+        }
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Montserrat', sans-serif;
+        }
+
+
+        body {
+            background-color: var(--dark-blue);
+            color: var(--white);
+            overflow-x: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        .login-container {
+            width: 100%;
+            max-width: 500px;
+            padding: 2rem;
+            background: rgba(4, 7, 20, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: var(--magic-gradient);
+            opacity: 0.1;
+            transform: rotate(45deg);
+            z-index: -1;
+            animation: rotateBg 20s linear infinite;
+        }
+
+
+        @keyframes rotateBg {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+
+        .logo {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+
+        .logo img {
+            height: 60px;
+            filter: drop-shadow(0 0 10px rgba(138, 43, 226, 0.5));
+        }
+
+
+        .login-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            background: var(--magic-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+        }
+
+
+        .login-form .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+
+        .login-form .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+
+        .login-form .form-group input {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: var(--white);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+
+        .login-form .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-purple);
+            box-shadow: 0 0 0 2px rgba(138, 43, 226, 0.3);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+
+        .login-form .form-group .input-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+
+        .remember-me input {
+            accent-color: var(--primary-purple);
+        }
+
+
+        .forgot-password a {
+            color: var(--primary-light-blue);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+
+        .login-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--magic-gradient);
+            border: none;
+            border-radius: 8px;
+            color: var(--white);
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+
+        .login-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+
+        .login-btn:hover::before {
+            left: 100%;
+        }
+
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(138, 43, 226, 0.6);
+        }
+
+
+        .signup-link {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+        }
+
+
+        .signup-link a {
+            color: var(--primary-light-blue);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+
+        .magic-elements {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+
+        .magic-element {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.3;
+            animation: float 15s infinite linear;
+        }
+
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-50px) rotate(180deg);
+            }
+            100% {
+                transform: translateY(0) rotate(360deg);
+            }
+        }
+
+
+        .element-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--primary-blue);
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+
+        .element-2 {
+            width: 200px;
+            height: 200px;
+            background: var(--primary-purple);
+            top: 60%;
+            left: 70%;
+            animation-delay: 2s;
+            animation-duration: 12s;
+        }
+
+
+        .element-3 {
+            width: 150px;
+            height: 150px;
+            background: var(--primary-pink);
+            top: 30%;
+            left: 50%;
+            animation-delay: 4s;
+            animation-duration: 10s;
+        }
+
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .login-container {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+           
+            .login-title {
+                font-size: 1.8rem;
+            }
+        }
+
+
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 1.5rem 1rem;
+            }
+           
+            .login-title {
+                font-size: 1.5rem;
+            }
+           
+            .remember-forgot {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="magic-elements">
+        <div class="magic-element element-1"></div>
+        <div class="magic-element element-2"></div>
+        <div class="magic-element element-3"></div>
+    </div>
+   
+    <div class="login-container">
+        <div class="logo">
+            <img src="https://via.placeholder.com/150x50/8a2be2/ffffff?text=Magic%2B" alt="Magic+">
+        </div>
+       
+        <h1 class="login-title">Bem-vindo de volta</h1>
+       
+        <form class="login-form" onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" placeholder="Digite seu e-mail" required>
+                <i class="fas fa-envelope input-icon"></i>
+            </div>
+           
+            <div class="form-group">
+                <label for="password">Senha</label>
+                <input type="password" id="password" placeholder="Digite sua senha" required>
+                <i class="fas fa-lock input-icon"></i>
+            </div>
+           
+            <div class="remember-forgot">
+                <div class="remember-me">
+                    <input type="checkbox" id="remember">
+                    <label for="remember">Lembrar de mim</label>
+                </div>
+                <div class="forgot-password">
+                    <a href="#">Esqueceu a senha?</a>
+                </div>
+            </div>
+           
+            <button type="submit" class="login-btn">ENTRAR</button>
+           
+            <div class="signup-link">
+                Não tem uma conta? <a href="planos.html">Assine agora</a>
+            </div>
+        </form>
+    </div>
+
+
+    <script>
+        // Função para lidar com o login
+        function handleLogin(event) {
+            event.preventDefault(); // Impede o envio do formulário
+           
+            // Pegar valores dos campos
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const rememberMe = document.getElementById('remember').checked;
+           
+            // Validação simples
+            if (!email || !password) {
+                alert('Por favor, preencha todos os campos!');
+                return;
+            }
+           
+            // Simular usuários cadastrados (em um sistema real, isso viria de um banco de dados)
+            const registeredUsers = [
+                { email: 'admin@magicplus.com', password: '123456', name: 'Administrador' },
+                { email: 'usuario@exemplo.com', password: 'senha123', name: 'Usuário Exemplo' }
+            ];
+           
+            // Verificar credenciais
+            const user = registeredUsers.find(u => u.email === email && u.password === password);
+           
+            if (user) {
+                // Salvar no localStorage se "Lembrar de mim" estiver marcado
+                if (rememberMe) {
+                    localStorage.setItem('loggedInUser', JSON.stringify({
+                        email: email,
+                        name: user.name,
+                        loggedIn: true
+                    }));
+                } else {
+                    // Usar sessionStorage para não persistir após fechar o navegador
+                    sessionStorage.setItem('loggedInUser', JSON.stringify({
+                        email: email,
+                        name: user.name,
+                        loggedIn: true
+                    }));
+                }
+               
+                // Redirecionar para a página principal
+                window.location.href = 'index.html';
+            } else {
+                alert('E-mail ou senha incorretos!');
+            }
+        }
+       
+        // Verificar se já está logado ao carregar a página
+        window.addEventListener('DOMContentLoaded', () => {
+            const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser') || sessionStorage.getItem('loggedInUser') || 'null');
+           
+            if (loggedInUser && loggedInUser.loggedIn) {
+                // Se já estiver logado, redirecionar
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+</body>
+</html>
