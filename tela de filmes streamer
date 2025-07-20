@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic+ | Filmes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #0063e5;
+            --primary-light-blue: #00a8ff;
+            --primary-purple: #8a2be2;
+            --primary-pink: #ff2d75;
+            --dark-blue: #040714;
+            --darker-blue: #020c1b;
+            --light-gray: #f9f9f9;
+            --white: #ffffff;
+            --black: #000000;
+            --gradient-bg: linear-gradient(135deg, var(--primary-blue), var(--primary-light-blue));
+            --magic-gradient: linear-gradient(135deg, var(--primary-purple), var(--primary-pink));
+        }
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Montserrat', sans-serif;
+        }
+
+
+        body {
+            background-color: var(--dark-blue);
+            color: var(--white);
+            overflow-x: hidden;
+        }
+
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 3rem;
+            background-color: var(--dark-blue);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+
+        .logo {
+            height: 40px;
+            filter: drop-shadow(0 0 10px rgba(138, 43, 226, 0.5));
+        }
+
+
+        .login-btn {
+            background: var(--magic-gradient);
+            border: none;
+            padding: 0.7rem 1.8rem;
+            border-radius: 4px;
+            color: var(--white);
+            font-weight: bold;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+        }
+
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(138, 43, 226, 0.6);
+        }
+
+
+        /* Hero Section */
+        .hero {
+            padding: 10rem 3rem 5rem;
+            background: linear-gradient(to bottom, var(--dark-blue), var(--darker-blue));
+            position: relative;
+            overflow: hidden;
+        }
+
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: var(--magic-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.1;
+            font-weight: 700;
+        }
+
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            max-width: 600px;
+        }
+
+
+        /* Content Sections */
+        .content-section {
+            padding: 5rem 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 2.5rem;
+            color: var(--white);
+            position: relative;
+            padding-bottom: 1rem;
+            font-weight: 700;
+        }
+
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100px;
+            height: 4px;
+            background: var(--magic-gradient);
+            border-radius: 2px;
+        }
+
+
+        .movies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+
+        .movie-card {
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            aspect-ratio: 2/3;
+        }
+
+
+        .movie-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+        }
+
+
+        .movie-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+
+        .movie-card:hover img {
+            transform: scale(1.05);
+        }
+
+
+        .movie-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+
+        .movie-card:hover .movie-info {
+            opacity: 1;
+        }
+
+
+        .movie-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+
+        .movie-meta {
+            display: flex;
+            gap: 0.8rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            color: #ffd700;
+        }
+
+
+        .watch-btn {
+            display: inline-block;
+            padding: 0.6rem 1.5rem;
+            background: var(--magic-gradient);
+            color: var(--white);
+            border-radius: 4px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+
+        .watch-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(138, 43, 226, 0.4);
+        }
+
+
+        /* Magic Elements */
+        .magic-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+
+        .magic-element {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.3;
+            animation: float 15s infinite linear;
+        }
+
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-50px) rotate(180deg);
+            }
+            100% {
+                transform: translateY(0) rotate(360deg);
+            }
+        }
+
+
+        .element-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--primary-blue);
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+
+        .element-2 {
+            width: 200px;
+            height: 200px;
+            background: var(--primary-purple);
+            top: 60%;
+            left: 70%;
+            animation-delay: 2s;
+            animation-duration: 12s;
+        }
+
+
+        .element-3 {
+            width: 150px;
+            height: 150px;
+            background: var(--primary-pink);
+            top: 30%;
+            left: 50%;
+            animation-delay: 4s;
+            animation-duration: 10s;
+        }
+
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+        }
+
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+           
+            .hero {
+                padding: 8rem 2rem 4rem;
+            }
+           
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+           
+            .content-section {
+                padding: 3rem 1.5rem;
+            }
+           
+            .movies-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+           
+            .hero p {
+                font-size: 1rem;
+            }
+           
+            .section-title {
+                font-size: 1.8rem;
+            }
+           
+            .movies-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 1rem;
+            }
+        }
+       
+/* Estilo para o botão quando logado */
+.navbar-right .login-btn.user-logged {
+    background: var(--darker-blue);
+    border: 1px solid var(--primary-purple);
+}
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-left">
+            <img src="https://via.placeholder.com/150x50/8a2be2/ffffff?text=Magic%2B" alt="Magic+" class="logo">
+        </div>
+        <div class="navbar-right">
+            <button class="login-btn" onclick="window.location.href='login.html'">
+                <i class="fas fa-user-circle"></i>
+                <span>ENTRAR</span>
+            </button>
+        </div>
+    </nav>
+
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="magic-elements">
+            <div class="magic-element element-1"></div>
+            <div class="magic-element element-2"></div>
+            <div class="magic-element element-3"></div>
+        </div>
+        <div class="hero-content">
+            <h1>Nossos Filmes</h1>
+            <p>Descubra um universo de magia com nossa coleção exclusiva de filmes. Novos títulos adicionados toda semana.</p>
+        </div>
+    </section>
+
+
+    <!-- Movies Section -->
+    <section class="content-section">
+        <h2 class="section-title">Todos os Filmes</h2>
+       
+        <div class="movies-grid">
+            <!-- *************** FILME 1 - COMEÇO *************** -->
+            <!--
+                ONDE MODIFICAR:
+                1. Troque a URL da imagem (src="SUA_IMAGEM_AQUI")
+                2. Troque o título (<h3>TÍTULO DO FILME</h3>)
+                3. Troque o ano (<span>ANO</span>)
+                4. Troque o gênero (<span>GÊNERO</span>)
+                5. Troque a nota (<span>NOTA</span>)
+                6. Troque o link do botão (href="SEU_LINK_AQUI")
+            -->
+            <div class="movie-card">
+                <img src="SUA_IMAGEM_AQUI" alt="Título do Filme">
+                <div class="movie-info">
+                    <h3>TÍTULO DO FILME</h3>
+                    <div class="movie-meta">
+                        <span>ANO</span>
+                        <span>•</span>
+                        <span>GÊNERO</span>
+                        <span>•</span>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>NOTA</span>
+                        </div>
+                    </div>
+                    <a href="SEU_LINK_AQUI" class="watch-btn">Assistir</a>
+                </div>
+            </div>
+            <!-- *************** FILME 1 - FIM *************** -->
+
+
+            <!-- *************** FILME 2 - COMEÇO *************** -->
+            <div class="movie-card">
+                <img src="SUA_IMAGEM_AQUI" alt="Título do Filme">
+                <div class="movie-info">
+                    <h3>TÍTULO DO FILME</h3>
+                    <div class="movie-meta">
+                        <span>ANO</span>
+                        <span>•</span>
+                        <span>GÊNERO</span>
+                        <span>•</span>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>NOTA</span>
+                        </div>
+                    </div>
+                    <a href="SEU_LINK_AQUI" class="watch-btn">Assistir</a>
+                </div>
+            </div>
+            <!-- *************** FILME 2 - FIM *************** -->
+
+
+            <!-- *************** FILME 3 - COMEÇO *************** -->
+            <div class="movie-card">
+                <img src="SUA_IMAGEM_AQUI" alt="Título do Filme">
+                <div class="movie-info">
+                    <h3>TÍTULO DO FILME</h3>
+                    <div class="movie-meta">
+                        <span>ANO</span>
+                        <span>•</span>
+                        <span>GÊNERO</span>
+                        <span>•</span>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>NOTA</span>
+                        </div>
+                    </div>
+                    <a href="SEU_LINK_AQUI" class="watch-btn">Assistir</a>
+                </div>
+            </div>
+            <!-- *************** FILME 3 - FIM *************** -->
+
+
+            <!-- *************** FILME 4 - COMEÇO *************** -->
+            <div class="movie-card">
+                <img src="SUA_IMAGEM_AQUI" alt="Título do Filme">
+                <div class="movie-info">
+                    <h3>TÍTULO DO FILME</h3>
+                    <div class="movie-meta">
+                        <span>ANO</span>
+                        <span>•</span>
+                        <span>GÊNERO</span>
+                        <span>•</span>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>NOTA</span>
+                        </div>
+                    </div>
+                    <a href="SEU_LINK_AQUI" class="watch-btn">Assistir</a>
+                </div>
+            </div>
+            <!-- *************** FILME 4 - FIM *************** -->
+
+
+            <!-- *************** FILME 5 - COMEÇO *************** -->
+            <div class="movie-card">
+                <img src="SUA_IMAGEM_AQUI" alt="Título do Filme">
+                <div class="movie-info">
+                    <h3>TÍTULO DO FILME</h3>
+                    <div class="movie-meta">
+                        <span>ANO</span>
+                        <span>•</span>
+                        <span>GÊNERO</span>
+                        <span>•</span>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>NOTA</span>
+                        </div>
+                    </div>
+                    <a href="SEU_LINK_AQUI" class="watch-btn">Assistir</a>
+                </div>
+            </div>
+            <!-- *************** FILME 5 - FIM *************** -->
+
+
+            <!-- *************** FILME 6 - COMEÇO *************** -->
+            <div class="movie-card">
+                <img src="SUA_IMAGEM_AQUI" alt="Título do Filme">
+                <div class="movie-info">
+                    <h3>TÍTULO DO FILME</h3>
+                    <div class="movie-meta">
+                        <span>ANO</span>
+                        <span>•</span>
+                        <span>GÊNERO</span>
+                        <span>•</span>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>NOTA</span>
+                        </div>
+                    </div>
+                    <a href="SEU_LINK_AQUI" class="watch-btn">Assistir</a>
+                </div>
+            </div>
+            <!-- *************** FILME 6 - FIM *************** -->
+        </div>
+    </section>
+
+
+    <script>
+        // Efeitos de hover nos cards
+        document.querySelectorAll('.movie-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-10px)';
+                card.style.boxShadow = '0 15px 30px rgba(0, 0, 0, 0.5)';
+            });
+           
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+                card.style.boxShadow = '0 8px 20px rgba(0, 0, 0, 0.3)';
+            });
+        });
+    </script>
+</body>
+</html>
